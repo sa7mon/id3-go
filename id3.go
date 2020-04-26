@@ -5,8 +5,8 @@ package id3
 
 import (
 	"errors"
-	"github.com/mikkyang/id3-go/v1"
-	"github.com/mikkyang/id3-go/v2"
+	"github.com/sa7mon/podarc/internal/id3-go/v1"
+	"github.com/sa7mon/podarc/internal/id3-go/v2"
 	"os"
 )
 
@@ -47,7 +47,7 @@ type File struct {
 }
 
 // Parses an open file
-func Parse(file *os.File) (*File, error) {
+func Parse(file *os.File, forcev2 bool) (*File, error) {
 	res := &File{file: file}
 
 	if v2Tag := v2.ParseTag(file); v2Tag != nil {
@@ -64,13 +64,13 @@ func Parse(file *os.File) (*File, error) {
 }
 
 // Opens a new tagged file
-func Open(name string) (*File, error) {
+func Open(name string, forceV2 bool) (*File, error) {
 	fi, err := os.OpenFile(name, os.O_RDWR, 0666)
 	if err != nil {
 		return nil, err
 	}
 
-	file, err := Parse(fi)
+	file, err := Parse(fi, forceV2)
 	if err != nil {
 		return nil, err
 	}

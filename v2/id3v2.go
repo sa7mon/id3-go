@@ -5,7 +5,7 @@ package v2
 
 import (
 	"fmt"
-	"github.com/mikkyang/id3-go/encodedbytes"
+	"github.com/sa7mon/podarc/internal/id3-go/encodedbytes"
 	"io"
 	"os"
 )
