@@ -50,14 +50,18 @@ type File struct {
 func Parse(file *os.File, forcev2 bool) (*File, error) {
 	res := &File{file: file}
 
-	if v2Tag := v2.ParseTag(file); v2Tag != nil {
-		res.Tagger = v2Tag
-		res.originalSize = v2Tag.Size()
-	} else if v1Tag := v1.ParseTag(file); v1Tag != nil {
-		res.Tagger = v1Tag
+	if forcev2 {
+		res.Tagger = v2.NewTag(2)
 	} else {
-		// Add a new tag if none exists
-		res.Tagger = v2.NewTag(LatestVersion)
+		if v2Tag := v2.ParseTag(file); v2Tag != nil {
+			res.Tagger = v2Tag
+			res.originalSize = v2Tag.Size()
+		} else if v1Tag := v1.ParseTag(file); v1Tag != nil {
+			res.Tagger = v1Tag
+		} else {
+			// Add a new tag if none exists
+			res.Tagger = v2.NewTag(LatestVersion)
+		}
 	}
 
 	return res, nil
