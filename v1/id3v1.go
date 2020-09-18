@@ -106,6 +106,18 @@ func (t *Tag) SetYear(text string) {
 	t.dirty = true
 }
 
+func (t *Tag) SetDate(text string) {
+	t.year = text
+	t.dirty = true
+	print("SetDate() not implemented for ID3v1 tags")
+}
+
+func (t *Tag) SetReleaseYear(text string) {
+	t.year = text
+	t.dirty = true
+	print("SetReleaseYear() not implemented for ID3v1 tags")
+}
+
 func (t *Tag) SetGenre(text string) {
 	t.genre = 255
 	for i, genre := range Genres {

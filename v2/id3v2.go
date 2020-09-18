@@ -255,6 +255,14 @@ func (t *Tag) SetYear(text string) {
 	t.setTextFrameText(t.commonMap["Year"], text)
 }
 
+func (t *Tag) SetDate(text string) {
+	t.setTextFrameText(t.commonMap["Date"], text)
+}
+
+func (t *Tag) SetReleaseYear(text string) {
+	t.setTextFrameText(t.commonMap["ReleaseYear"], text)
+}
+
 func (t *Tag) SetGenre(text string) {
 	t.setTextFrameText(t.commonMap["Genre"], text)
 }
